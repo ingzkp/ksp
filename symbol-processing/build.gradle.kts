@@ -78,16 +78,19 @@ publishing {
                         name.set("KSP Team")
                     }
                 }
-                scm {
-                    connection.set("scm:git:https://github.com/google/ksp.git")
-                    developerConnection.set("scm:git:https://github.com/google/ksp.git")
-                    url.set("https://github.com/google/ksp")
-                }
             }
         }
         project.shadow.component(publication)
         repositories {
-            mavenLocal()
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/ingzkp/ksp")
+                credentials {
+                    username = System.getenv("GITHUB_USERNAME")
+                    password = System.getenv("GITHUB_TOKEN")
+                }
+            }
+            // mavenLocal()
         }
     }
 }
